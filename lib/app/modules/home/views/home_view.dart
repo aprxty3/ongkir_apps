@@ -21,15 +21,16 @@ class HomeView extends GetView<HomeController> {
           padding: const EdgeInsets.all(20),
           children: [
             DropdownSearch<Province>(
-              mode: Mode.MENU,
-              showClearButton: true,
-              showSearchBox: true,
               onFind: (String filter) async {
-                var res = await http.get(
-                  Uri.parse('https://api.rajaongkir.com/starter/province'),
-                  headers: {"key": "c260d509530ff505c32408a7418c79bb"},
-                );
+                Uri url =
+                    Uri.parse("https://api.rajaongkir.com/starter/province");
+
                 try {
+                  final res = await http.get(
+                    url,
+                    headers: {"key": "0ae702200724a396a933fa0ca4171a7e"},
+                  );
+
                   var data = jsonDecode(res.body) as Map<String, dynamic>;
 
                   var status = data["rajaongkir"]["status"]["code"];
@@ -39,47 +40,25 @@ class HomeView extends GetView<HomeController> {
                   }
 
                   var listAllProvince =
-                      data["rajaongkir"]["result"] as List<dynamic>;
+                      data["rajaongkir"]["results"] as List<dynamic>;
                   var models = Province.fromJsonList(listAllProvince);
                   return models;
                 } catch (e) {
+                  print(e);
                   return List<Province>.empty();
                 }
               },
-              // items: [],
-              searchBoxDecoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  )),
+              popupItemBuilder: (context, item, isSelected) {
+                return Container(
+                  margin: EdgeInsets.all(12),
+                  child: Text("${item.province}"),
+                );
+              },
+              showSearchBox: true,
+              itemAsString: (item) => item.province!,
               label: "Provisi Asal",
               hint: "Pilih Provinsi",
-              onChanged: (data) => print(data),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            DropdownSearch<String>(
-              showClearButton: true,
-              showSearchBox: true,
-              mode: Mode.MENU,
-              items: [
-                "Jateng",
-                "DIY (Jatim)",
-                "Banten",
-                'DKI Jakarta',
-                'Jabar'
-              ],
-              searchBoxDecoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  )),
-              label: "Kota Tujuan",
-              hint: "Pilih Provinsi",
-              onChanged: (value) => print(value),
+              onChanged: (value) => print(value!.province),
             ),
           ],
         ));
