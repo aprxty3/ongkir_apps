@@ -18,6 +18,8 @@ class HomeView extends GetView<HomeController> {
           children: [
             DropdownSearch<String>(
               mode: Mode.MENU,
+              showClearButton: true,
+              showSearchBox: true,
               items: [
                 "Jateng",
                 "DIY (Jatim)",
@@ -25,15 +27,39 @@ class HomeView extends GetView<HomeController> {
                 'DKI Jakarta',
                 'Jabar'
               ],
-              dropdownSearchDecoration: InputDecoration(
-                labelText: "Provisi",
-                hintText: "Pilih Provinsi",
-              ),
-              onChanged: print,
-              selectedItem: "Brazil",
+              searchBoxDecoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  )),
+              label: "Provisi Asal",
+              hint: "Pilih Provinsi",
+              onChanged: (value) => print(value),
             ),
             SizedBox(
               height: 16,
+            ),
+            DropdownSearch<String>(
+              showClearButton: true,
+              showSearchBox: true,
+              mode: Mode.MENU,
+              items: [
+                "Jateng",
+                "DIY (Jatim)",
+                "Banten",
+                'DKI Jakarta',
+                'Jabar'
+              ],
+              searchBoxDecoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  )),
+              label: "Kota Tujuan",
+              hint: "Pilih Provinsi",
+              onChanged: (value) => print(value),
             ),
           ],
         ));
