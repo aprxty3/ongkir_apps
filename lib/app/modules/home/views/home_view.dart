@@ -29,15 +29,24 @@ class HomeView extends GetView<HomeController> {
                   Uri.parse('https://api.rajaongkir.com/starter/province'),
                   headers: {"key": "c260d509530ff505c32408a7418c79bb"},
                 );
+                try {
+                  var data = jsonDecode(res.body) as Map<String, dynamic>;
 
-                var data = jsonDecode(res.body) as Map<String, dynamic>;
+                  var status = data["rajaongkir"]["status"]["code"];
 
-                var listAllProvince =
-                    data["rajaongkir"]["result"] as List<dynamic>;
-                var models = Province.fromJsonList(listAllProvince);
-                return models;
+                  if (status != 200) {
+                    throw data["rajaongkir"]["status"]["description"];
+                  }
+
+                  var listAllProvince =
+                      data["rajaongkir"]["result"] as List<dynamic>;
+                  var models = Province.fromJsonList(listAllProvince);
+                  return models;
+                } catch (e) {
+                  return List<Province>.empty();
+                }
               },
-              items: [],
+              // items: [],
               searchBoxDecoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
