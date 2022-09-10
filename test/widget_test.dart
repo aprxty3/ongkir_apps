@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:ongkir_apps/app/data/models/user_models.dart';
 
 void main() async {
-  Uri url = Uri.parse('https://reqres.in/api/users/2');
+  Uri url = Uri.parse('https://reqres.in/api/users/5');
   final res = await http.get(url);
 
-  final data = (jsonDecode(res.body) as Map<String, dynamic>)["data"];
+  final user =
+      UserModelsResponse.fromJson(jsonDecode(res.body) as Map<String, dynamic>);
 
-  print(data["first_name"] + " " + data["last_name"]);
+  print(user.data.firstName + " " + user.data.lastName);
 }
