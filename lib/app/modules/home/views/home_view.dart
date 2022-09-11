@@ -24,18 +24,30 @@ class HomeView extends GetView<HomeController> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          ProvinsiWidget(),
-          SizedBox(
-            height: 16,
+          ProvinsiWidget(
+            type: 'asal',
           ),
           Obx(() {
-            return controller.hiddenKota.isTrue ? SizedBox() : KotaWidget(proveId: controller.provinceId.value);
+            return controller.hiddenKota.isTrue
+                ? SizedBox()
+                : KotaWidget(
+                    proveId: controller.provinceId.value,
+                    type: 'asal',
+                  );
+          }),
+          ProvinsiWidget(
+            type: 'tujuan',
+          ),
+          Obx(() {
+            return controller.hiddenKotaTujuan.isTrue
+                ? SizedBox()
+                : KotaWidget(
+                    proveId: controller.provinceId.value,
+                    type: 'tujuan',
+                  );
           }),
         ],
       ),
     );
   }
-
-  
 }
-
