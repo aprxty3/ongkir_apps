@@ -13,6 +13,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    final int proveId;
     return Scaffold(
       appBar: AppBar(
         title: Text('Aplikasi Ongkos Kirim'),
@@ -25,7 +26,9 @@ class HomeView extends GetView<HomeController> {
           SizedBox(
             height: 16,
           ),
-          _city(),
+          Obx(() {
+            return controller.hiddenKota.isTrue ? SizedBox() : KotaWidget(proveId: controller.provinceId.value);
+          }),
         ],
       ),
     );
@@ -33,6 +36,7 @@ class HomeView extends GetView<HomeController> {
 
   _province() {
     return DropdownSearch<Province>(
+
       showClearButton: true,
       onFind: (String filter) async {
         Uri url = Uri.parse("https://api.rajaongkir.com/starter/province");
@@ -71,19 +75,25 @@ class HomeView extends GetView<HomeController> {
       hint: "Pilih Provinsi",
       onChanged: (prov) {
         if (prov != null) {
-          return print(prov.province);
+         controller.hiddenKota.value = false ;
+         controller.provinceId.value = int.parse(prov.provinceId!);
         } else {
-          return print('ga pilih provinsi manapun');
+          controller.hiddenKota.value = true;
         }
       },
     );
   }
+  
+}
+class KotaWidget extends StatelessWidget {
+  final int proveId;
+  const KotaWidget({Key? key, required this.proveId}) : super(key: key);
 
-  _city() {
+  @override
+  Widget build(BuildContext context) {
     return DropdownSearch<City>(
       onFind: (String filter) async {
-        Uri url =
-            Uri.parse("https://api.rajaongkir.com/starter/city?province=5");
+        Uri url = Uri.parse("https://api.rajaongkir.com/starter/city?province=$proveId");
 
         try {
           final res = await http.get(
@@ -110,18 +120,19 @@ class HomeView extends GetView<HomeController> {
       popupItemBuilder: (context, item, isSelected) {
         return Container(
           margin: EdgeInsets.all(12),
-          child: Text("${item.cityName}"),
+          child: Text("${item.type} ${item.cityName}"),
         );
       },
+      showClearButton: true,
       showSearchBox: true,
       itemAsString: (item) => item.cityName!,
-      label: "Kota Asal",
-      hint: "Pilih Kota",
+      label: "Kota/Kabupaten Asal",
+      hint: "Pilih Kota/Kabupaten",
       onChanged: (city) {
         if (city != null) {
           return print(city.province);
         } else {
-          return print('ga pilih provinsi manapun');
+          return print('ga pilih kota manapun');
         }
       },
     );
