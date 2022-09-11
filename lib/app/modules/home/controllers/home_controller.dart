@@ -9,7 +9,7 @@ class HomeController extends GetxController {
   var provinceTujuanId = 0.obs;
   var kotaTujuanId = 0.obs;
 
-  late TextEditingController beratC;
+  var beratC = TextEditingController();
 
   @override
   void onInit() {
