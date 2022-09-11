@@ -109,7 +109,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    beratC = TextEditingController(text: '$berat');
+    beratC = TextEditingController();
   }
 
   @override
