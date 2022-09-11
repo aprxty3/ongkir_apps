@@ -16,7 +16,7 @@ class BeratWidget extends GetView<HomeController> {
             autocorrect: false,
             controller: controller.beratC,
             keyboardType: TextInputType.numberWithOptions(decimal: true),
-            onChanged: (value) => print(value),
+            onChanged: (value) => controller.ubahBerat(value),
             decoration: InputDecoration(
               labelText: 'Berat Barang',
               hintText: 'Masukan Berat Barang',
@@ -52,8 +52,8 @@ class BeratWidget extends GetView<HomeController> {
               'mg'
             ],
             label: 'Satuan',
-            onChanged: print,
-            selectedItem: "kg",
+            onChanged: (value) => controller.ubahSatuan(value!),
+            selectedItem: "gram",
           ),
         )
       ],
