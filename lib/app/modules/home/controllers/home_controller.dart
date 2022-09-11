@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -7,4 +8,20 @@ class HomeController extends GetxController {
   var hiddenKotaTujuan = true.obs;
   var provinceTujuanId = 0.obs;
   var kotaTujuanId = 0.obs;
+
+  late TextEditingController beratC;
+
+  @override
+  void onInit() {
+    super.onInit();
+    beratC = TextEditingController();
+    update();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    beratC.dispose();
+    update();
+  }
 }
