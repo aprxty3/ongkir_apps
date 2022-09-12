@@ -9,6 +9,7 @@ class HomeController extends GetxController {
   var provinceTujuanId = 0.obs;
   var kotaTujuanId = 0.obs;
   var hiddenButton = true.obs;
+  var kurir = ''.obs;
 
   double berat = 0.0;
   String satuan = 'gram';
@@ -59,6 +60,7 @@ class HomeController extends GetxController {
         berat = berat;
     }
     print("$berat gram");
+    showButton();
   }
 
   void ubahSatuan(String value) {
@@ -105,6 +107,15 @@ class HomeController extends GetxController {
     }
     satuan = value;
     print("$berat gram");
+    showButton();
+  }
+
+  void showButton() {
+    if (kotaAsalId != 0 && kotaTujuanId != 0 && berat > 0 && kurir != '') {
+      hiddenButton.value = false;
+    } else {
+      hiddenButton.value = true;
+    }
   }
 
   @override

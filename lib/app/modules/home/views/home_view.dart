@@ -74,15 +74,11 @@ class HomeView extends GetView<HomeController> {
               itemAsString: (item) => '${item['name']}',
               onChanged: (value) {
                 if (value != null) {
-                  if (controller.kotaAsalId != 0 &&
-                      controller.kotaTujuanId != 0 &&
-                      controller.berat > 0) {
-                    controller.hiddenButton.value = false;
-                  } else {
-                    controller.hiddenButton.value = true;
-                  }
+                  controller.kurir.value = value["code"];
+                  controller.showButton();
                 } else {
                   controller.hiddenButton.value = true;
+                  controller.kurir.value = '';
                 }
               },
               label: 'Pilih Kurir',

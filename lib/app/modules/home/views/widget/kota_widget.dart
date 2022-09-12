@@ -64,11 +64,14 @@ class KotaWidget extends GetView<HomeController> {
             } else {
               controller.kotaTujuanId.value = int.parse(city.cityId!);
             }
+            controller.showButton();
           } else {
             if (type == 'asal') {
               print('ga pilih kota manapun');
+              controller.kotaAsalId.value = 0;
             } else {
               print('ga pilih kota manapun');
+              controller.kotaTujuanId.value = 0;
             }
           }
         },

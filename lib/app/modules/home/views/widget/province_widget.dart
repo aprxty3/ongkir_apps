@@ -36,7 +36,8 @@ class ProvinsiWidget extends GetView<HomeController> {
               throw data["rajaongkir"]["status"]["description"];
             }
 
-            var listAllProvince = data["rajaongkir"]["results"] as List<dynamic>;
+            var listAllProvince =
+                data["rajaongkir"]["results"] as List<dynamic>;
             var models = Province.fromJsonList(listAllProvince);
             return models;
           } catch (e) {
@@ -63,6 +64,7 @@ class ProvinsiWidget extends GetView<HomeController> {
               controller.hiddenKotaTujuan.value = false;
               controller.provinceTujuanId.value = int.parse(prov.provinceId!);
             }
+            controller.showButton();
           } else {
             if (type == 'asal') {
               controller.hiddenKota.value = true;
