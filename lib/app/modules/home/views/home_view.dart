@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: Text('Aplikasi Ongkos Kirim'),
         centerTitle: true,
+        backgroundColor: Colors.red[900],
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
@@ -41,6 +43,47 @@ class HomeView extends GetView<HomeController> {
                   );
           }),
           BeratWidget(),
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0, bottom: 50),
+            child: DropdownSearch<Map<String, dynamic>>(
+              mode: Mode.MENU,
+              showClearButton: true,
+              items: [
+                {
+                  "code": "jne",
+                  "name": "Jalur Nugraha Ekakurir (JNE)",
+                },
+                {
+                  "code": "pos",
+                  "name": "Perusahaan Opsional Surat (POS)",
+                },
+                {
+                  "code": "tiki",
+                  "name": "Titipan Kilat (TIKI)",
+                }
+              ],
+              popupItemBuilder: (context, item, isSelected) {
+                return Container(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    '${item['name']}',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                );
+              },
+              itemAsString: (item) => ,
+              onChanged: (value) => print(value),
+              label: 'Pilih Kurir',
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Cek Ongkos Kirim'),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              backgroundColor: Colors.red[900],
+            ),
+          ),
         ],
       ),
     );
