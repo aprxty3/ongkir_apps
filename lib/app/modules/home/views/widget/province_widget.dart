@@ -11,7 +11,7 @@ import '../../province_model.dart';
 class ProvinsiWidget extends GetView<HomeController> {
   final String type;
 
-  const ProvinsiWidget({Key? key, required this.type}) : super(key: key);
+  const ProvinsiWidget({Key? key, this.type = ''}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

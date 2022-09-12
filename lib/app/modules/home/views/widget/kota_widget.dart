@@ -12,7 +12,7 @@ class KotaWidget extends GetView<HomeController> {
   final int proveId;
   final String type;
 
-  const KotaWidget({Key? key, required this.proveId, required this.type})
+  const KotaWidget({Key? key, required this.proveId, this.type = ''})
       : super(key: key);
 
   @override

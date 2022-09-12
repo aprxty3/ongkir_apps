@@ -13,7 +13,6 @@ class BeratWidget extends GetView<HomeController> {
       children: [
         Expanded(
           child: TextFormField(
-            autocorrect: false,
             controller: controller.beratC,
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             onChanged: (value) => controller.ubahBerat(value),

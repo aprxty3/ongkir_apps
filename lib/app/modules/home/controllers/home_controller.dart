@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   var hiddenKotaTujuan = true.obs;
   var provinceTujuanId = 0.obs;
   var kotaTujuanId = 0.obs;
+  var hiddenButton = true.obs;
 
   double berat = 0.0;
   String satuan = 'gram';

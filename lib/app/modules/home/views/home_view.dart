@@ -71,19 +71,35 @@ class HomeView extends GetView<HomeController> {
                   ),
                 );
               },
-              itemAsString: (item) => ,
-              onChanged: (value) => print(value),
+              itemAsString: (item) => '${item['name']}',
+              onChanged: (value) {
+                if (value != null) {
+                  if (controller.kotaAsalId != 0 &&
+                      controller.kotaTujuanId != 0 &&
+                      controller.berat > 0) {
+                    controller.hiddenButton.value = false;
+                  } else {
+                    controller.hiddenButton.value = true;
+                  }
+                } else {
+                  controller.hiddenButton.value = true;
+                }
+              },
               label: 'Pilih Kurir',
             ),
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Cek Ongkos Kirim'),
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              backgroundColor: Colors.red[900],
-            ),
-          ),
+          Obx(() {
+            return controller.hiddenButton.isTrue
+                ? SizedBox()
+                : ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Cek Ongkos Kirim'),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      backgroundColor: Colors.red[900],
+                    ),
+                  );
+          }),
         ],
       ),
     );
