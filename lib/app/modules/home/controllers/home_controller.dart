@@ -51,7 +51,11 @@ class HomeController extends GetxController {
                 (e) => ListTile(
                   title: Text('${e.service}'),
                   subtitle: Text('${e.cost[0].value}'),
-                  trailing: Text('${e.cost[0].etd}'),
+                  trailing: Text(
+                    courier.code == 'pos'
+                        ? '${e.cost[0].etd}'
+                        : '${e.cost[0].etd} hari',
+                  ),
                 ),
               )
               .toList(),
