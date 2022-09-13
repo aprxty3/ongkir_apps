@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:ongkir_apps/app/modules/home/courier_model.dart';
 
 class HomeController extends GetxController {
   var hiddenKota = true.obs;
@@ -37,8 +39,24 @@ class HomeController extends GetxController {
         },
       );
       var data = json.decode(res.body) as Map<String, dynamic>;
-      var results = data["rajaongkir"]["results"];
-      print(results);
+      var results = data["rajaongkir"]["results"] as List<dynamic>;
+
+      var listCourier = Courier.fromJsonList(results);
+      var courier = listCourier[0];
+      Get.defaultDialog(
+        title: courier.name,
+        content: Column(
+          children: courier.costs
+              .map(
+                (e) => ListTile(
+                  title: Text('${e.service}'),
+                  subtitle: Text('${e.cost[0].value}'),
+                  trailing: Text('${e.cost[0].etd}'),
+                ),
+              )
+              .toList(),
+        ),
+      );
     } catch (e) {
       print(e);
       Get.defaultDialog(
