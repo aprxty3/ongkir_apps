@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
   var hiddenKota = true.obs;
@@ -15,6 +16,25 @@ class HomeController extends GetxController {
   String satuan = 'gram';
 
   late TextEditingController beratC;
+
+  void ongkosKirim() async {
+    Uri url = Uri.parse('https://api.rajaongkir.com/starter/cost');
+    final res = await http.post(
+      url,
+      body: {
+        "origin": "501",
+        "destination": "114",
+        "weight": "1700",
+        "courier": "jne",
+      },
+      headers: {
+        "key": "cf627e9dd6601da74350c46ab1f2c853",
+        "content-type": "application/x-www-form-urlencoded",
+      },
+    );
+
+    print(res.body);
+  }
 
   void ubahBerat(String value) {
     berat = double.tryParse(value) ?? 0.0;
