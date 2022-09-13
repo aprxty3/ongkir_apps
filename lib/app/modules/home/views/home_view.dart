@@ -88,7 +88,7 @@ class HomeView extends GetView<HomeController> {
             return controller.hiddenButton.isTrue
                 ? SizedBox()
                 : ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => controller.ongkosKirim(),
                     child: Text('Cek Ongkos Kirim'),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 20),
