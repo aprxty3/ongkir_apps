@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -19,21 +21,30 @@ class HomeController extends GetxController {
 
   void ongkosKirim() async {
     Uri url = Uri.parse('https://api.rajaongkir.com/starter/cost');
-    final res = await http.post(
-      url,
-      body: {
-        "origin": "501",
-        "destination": "114",
-        "weight": "1700",
-        "courier": "jne",
-      },
-      headers: {
-        "key": "cf627e9dd6601da74350c46ab1f2c853",
-        "content-type": "application/x-www-form-urlencoded",
-      },
-    );
+    showButton();
+    try {
+      final res = await http.post(
+        url,
+        body: {
+          "origin": "$kotaAsalId",
+          "destination": "$kotaTujuanId",
+          "weight": "$berat",
+          "courier": "$kurir",
+        },
+        headers: {
+          "key": "cf627e9dd6601da74350c46ab1f2c853",
+          "content-type": "application/x-www-form-urlencoded",
+        },
+      );
 
-    print(res.body);
+      print(json.decode(res.body) as Map<String, dynamic>);
+    } catch (e) {
+      print(e);
+      Get.defaultDialog(
+        title: 'terjadi kesalahan',
+        middleText: e.toString(),
+      );
+    }
   }
 
   void ubahBerat(String value) {
