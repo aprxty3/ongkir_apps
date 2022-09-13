@@ -74,6 +74,7 @@ class KotaWidget extends GetView<HomeController> {
               controller.kotaTujuanId.value = 0;
             }
           }
+          controller.showButton();
         },
       ),
     );
