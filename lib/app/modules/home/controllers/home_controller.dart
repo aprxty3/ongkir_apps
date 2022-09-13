@@ -36,8 +36,9 @@ class HomeController extends GetxController {
           "content-type": "application/x-www-form-urlencoded",
         },
       );
-
-      print(json.decode(res.body) as Map<String, dynamic>);
+      var data = json.decode(res.body) as Map<String, dynamic>;
+      var results = data["rajaongkir"]["results"];
+      print(results);
     } catch (e) {
       print(e);
       Get.defaultDialog(
