@@ -52,6 +52,11 @@ class CourierCost {
         "description": description,
         "cost": List<dynamic>.from(cost.map((x) => x.toJson())),
       };
+
+  static List<Courier> fromJsonList(List list) {
+    if (list.length == null) return List<Courier>.empty();
+    return list.map((item) => Courier.fromJson(item)).toList();
+  }
 }
 
 class CostCost {
