@@ -1,16 +1,12 @@
 # ongkir_apps
 
-A new Flutter project.
+A Project to Check Delivery Fee
 
-## Getting Started
+## API
+https://rajaongkir.com/dokumentasi/starter
 
-This project is a starting point for a Flutter application.
+## View
+![image](https://user-images.githubusercontent.com/73772152/191025164-e7e1b1fc-75b3-43d3-aecd-28cf69370bfb.png)
+![image](https://user-images.githubusercontent.com/73772152/191025295-7db232e0-4ee3-407e-b9be-6f4edaf0eb56.png)
+![image](https://user-images.githubusercontent.com/73772152/191025324-5fe3b72b-36f7-4ef7-bca8-30b83c948169.png)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
