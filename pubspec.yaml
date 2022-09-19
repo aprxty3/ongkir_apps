@@ -20,5 +20,11 @@ dev_dependencies:
     sdk: flutter
   lints: ^2.0.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/truck.png"
+  min_sdk_android: 21
+
 flutter:
   uses-material-design: true
