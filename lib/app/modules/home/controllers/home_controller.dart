@@ -1,31 +1,30 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:ongkir_apps/app/modules/home/courier_model.dart';
+
+import '../courier_model.dart';
 
 class HomeController extends GetxController {
-  var hiddenKota = true.obs;
-  var provinceId = 0.obs;
+  var hiddenKotaAsal = true.obs;
+  var provAsalId = 0.obs;
   var kotaAsalId = 0.obs;
   var hiddenKotaTujuan = true.obs;
-  var provinceTujuanId = 0.obs;
+  var provTujuanId = 0.obs;
   var kotaTujuanId = 0.obs;
   var hiddenButton = true.obs;
-  var kurir = ''.obs;
+  var kurir = "".obs;
 
   double berat = 0.0;
-  String satuan = 'gram';
+  String satuan = "gram";
 
   late TextEditingController beratC;
 
   void ongkosKirim() async {
-    Uri url = Uri.parse('https://api.rajaongkir.com/starter/cost');
-    showButton();
+    Uri url = Uri.parse("https://api.rajaongkir.com/starter/cost");
     try {
-      final res = await http.post(
+      final response = await http.post(
         url,
         body: {
           "origin": "$kotaAsalId",
@@ -34,39 +33,49 @@ class HomeController extends GetxController {
           "courier": "$kurir",
         },
         headers: {
-          "key": "cf627e9dd6601da74350c46ab1f2c853",
+          "key": "0ae702200724a396a933fa0ca4171a7e",
           "content-type": "application/x-www-form-urlencoded",
         },
       );
-      var data = json.decode(res.body) as Map<String, dynamic>;
+
+      var data = json.decode(response.body) as Map<String, dynamic>;
       var results = data["rajaongkir"]["results"] as List<dynamic>;
 
-      var listCourier = Courier.fromJsonList(results);
-      var courier = listCourier[0];
+      var listAllCourier = Courier.fromJsonList(results);
+      var courier = listAllCourier[0];
+
       Get.defaultDialog(
-        title: courier.name,
+        title: courier.name!,
         content: Column(
-          children: courier.costs
+          children: courier.costs!
               .map(
                 (e) => ListTile(
-                  title: Text('${e.service}'),
-                  subtitle: Text('${e.cost[0].value}'),
-                  trailing: Text(
-                    courier.code == 'pos'
-                        ? '${e.cost[0].etd}'
-                        : '${e.cost[0].etd} hari',
-                  ),
-                ),
-              )
+              title: Text("${e.service}"),
+              subtitle: Text("Rp ${e.cost![0].value}"),
+              trailing: Text(
+                courier.code == "pos"
+                    ? "${e.cost![0].etd}"
+                    : "${e.cost![0].etd} HARI",
+              ),
+            ),
+          )
               .toList(),
         ),
       );
-    } catch (e) {
-      print(e);
+    } catch (err) {
+      print(err);
       Get.defaultDialog(
-        title: 'terjadi kesalahan',
-        middleText: e.toString(),
+        title: "Terjadi Kesalahan",
+        middleText: err.toString(),
       );
+    }
+  }
+
+  void showButton() {
+    if (kotaAsalId != 0 && kotaTujuanId != 0 && berat > 0 && kurir != "") {
+      hiddenButton.value = false;
+    } else {
+      hiddenButton.value = true;
     }
   }
 
@@ -113,6 +122,7 @@ class HomeController extends GetxController {
       default:
         berat = berat;
     }
+
     print("$berat gram");
     showButton();
   }
@@ -159,28 +169,22 @@ class HomeController extends GetxController {
       default:
         berat = berat;
     }
+
     satuan = value;
+
     print("$berat gram");
     showButton();
   }
 
-  void showButton() {
-    if (kotaAsalId != 0 && kotaTujuanId != 0 && berat > 0 && kurir != '') {
-      hiddenButton.value = false;
-    } else {
-      hiddenButton.value = true;
-    }
-  }
-
   @override
   void onInit() {
+    beratC = TextEditingController(text: "$berat");
     super.onInit();
-    beratC = TextEditingController();
   }
 
   @override
   void onClose() {
-    super.onClose();
     beratC.dispose();
+    super.onClose();
   }
 }
