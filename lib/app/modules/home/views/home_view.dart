@@ -1,10 +1,10 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ongkir_apps/app/modules/home/views/widget/kota_widget.dart';
+import 'package:ongkir_apps/app/modules/home/views/widget/province_widget.dart';
+import 'package:ongkir_apps/app/modules/home/views/widget/weight_widget.dart';
 
-import './widgets/province.dart';
-import './widgets/city.dart';
-import './widgets/berat.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -22,21 +22,21 @@ class HomeView extends GetView<HomeController> {
           children: [
             Provinsi(tipe: "asal"),
             Obx(
-                  () => controller.hiddenKotaAsal.isTrue
+              () => controller.hiddenKotaAsal.isTrue
                   ? SizedBox()
                   : Kota(
-                provId: controller.provAsalId.value,
-                tipe: "asal",
-              ),
+                      provId: controller.provAsalId.value,
+                      tipe: "asal",
+                    ),
             ),
             Provinsi(tipe: "tujuan"),
             Obx(
-                  () => controller.hiddenKotaTujuan.isTrue
+              () => controller.hiddenKotaTujuan.isTrue
                   ? SizedBox()
                   : Kota(
-                provId: controller.provTujuanId.value,
-                tipe: "tujuan",
-              ),
+                      provId: controller.provTujuanId.value,
+                      tipe: "tujuan",
+                    ),
             ),
             BeratBarang(),
             Padding(
@@ -83,16 +83,16 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             Obx(
-                  () => controller.hiddenButton.isTrue
+              () => controller.hiddenButton.isTrue
                   ? SizedBox()
                   : ElevatedButton(
-                onPressed: () => controller.ongkosKirim(),
-                child: Text("CEK ONGKOS KIRIM"),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  primary: Colors.red[900],
-                ),
-              ),
+                      onPressed: () => controller.ongkosKirim(),
+                      child: Text("CEK ONGKOS KIRIM"),
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        primary: Colors.red[900],
+                      ),
+                    ),
             ),
           ],
         ),

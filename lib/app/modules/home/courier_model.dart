@@ -16,17 +16,17 @@ class Courier {
   List<CourierCost>? costs;
 
   factory Courier.fromJson(Map<String, dynamic> json) => Courier(
-    code: json["code"],
-    name: json["name"],
-    costs: List<CourierCost>.from(
-        json["costs"].map((x) => CourierCost.fromJson(x))),
-  );
+        code: json["code"],
+        name: json["name"],
+        costs: List<CourierCost>.from(
+            json["costs"].map((x) => CourierCost.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "code": code,
-    "name": name,
-    "costs": List<dynamic>.from(costs!.map((x) => x.toJson())),
-  };
+        "code": code,
+        "name": name,
+        "costs": List<dynamic>.from(costs!.map((x) => x.toJson())),
+      };
 
   static List<Courier> fromJsonList(List list) {
     if (list.length == 0) return List<Courier>.empty();
@@ -46,17 +46,17 @@ class CourierCost {
   List<CostCost>? cost;
 
   factory CourierCost.fromJson(Map<String, dynamic> json) => CourierCost(
-    service: json["service"],
-    description: json["description"],
-    cost:
-    List<CostCost>.from(json["cost"].map((x) => CostCost.fromJson(x))),
-  );
+        service: json["service"],
+        description: json["description"],
+        cost:
+            List<CostCost>.from(json["cost"].map((x) => CostCost.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "service": service,
-    "description": description,
-    "cost": List<dynamic>.from(cost!.map((x) => x.toJson())),
-  };
+        "service": service,
+        "description": description,
+        "cost": List<dynamic>.from(cost!.map((x) => x.toJson())),
+      };
 }
 
 class CostCost {
@@ -71,14 +71,14 @@ class CostCost {
   String? note;
 
   factory CostCost.fromJson(Map<String, dynamic> json) => CostCost(
-    value: json["value"],
-    etd: json["etd"],
-    note: json["note"],
-  );
+        value: json["value"],
+        etd: json["etd"],
+        note: json["note"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "value": value,
-    "etd": etd,
-    "note": note,
-  };
+        "value": value,
+        "etd": etd,
+        "note": note,
+      };
 }

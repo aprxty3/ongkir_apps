@@ -42,7 +42,7 @@ class Provinsi extends GetView<HomeController> {
             }
 
             var listAllProvince =
-            data["rajaongkir"]["results"] as List<dynamic>;
+                data["rajaongkir"]["results"] as List<dynamic>;
 
             var models = Province.fromJsonList(listAllProvince);
             return models;

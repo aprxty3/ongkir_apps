@@ -50,15 +50,15 @@ class HomeController extends GetxController {
           children: courier.costs!
               .map(
                 (e) => ListTile(
-              title: Text("${e.service}"),
-              subtitle: Text("Rp ${e.cost![0].value}"),
-              trailing: Text(
-                courier.code == "pos"
-                    ? "${e.cost![0].etd}"
-                    : "${e.cost![0].etd} HARI",
-              ),
-            ),
-          )
+                  title: Text("${e.service}"),
+                  subtitle: Text("Rp ${e.cost![0].value}"),
+                  trailing: Text(
+                    courier.code == "pos"
+                        ? "${e.cost![0].etd}"
+                        : "${e.cost![0].etd} HARI",
+                  ),
+                ),
+              )
               .toList(),
         ),
       );
